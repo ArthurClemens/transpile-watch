@@ -1,0 +1,12 @@
+{
+  "name": "transpile-watch",
+  "version": "0.0.1",
+  "description": "Utility script for transpiling directories",
+  "main": "transpile-watch.js",
+  "scripts": {},
+  "author": "Arthur Clemens <arthurclemens@gmail.com> (http://visiblearea.com)",
+  "license": "ISC",
+  "dependencies": {
+    "chokidar": "^1.2.0"
+  }
+}
