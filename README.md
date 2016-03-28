@@ -33,6 +33,11 @@ Function: `function(inPath, outPath) -> String`: function to do the transpiling
 
 Function: `function(inPath) -> Boolean`: function to check the validity of the path
 
+##### debug
+
+Boolean: set to `true` to log the results of the transform function
+
+    
     
 ## Example
 
