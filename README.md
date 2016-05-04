@@ -38,7 +38,7 @@ Boolean: set to `true` to log the results of the transform function
 
 ### events
 
-Array: `['eventName', 'eventName']`: Transpile on defined events. Available events are: ready, add, change, unlink, addDir, unlinkDir (related to chokidar's events). If the event ready is choosen, transpiling already starts running the script.
+Array: `['eventName', 'eventName']`: Transpile on defined events. Available events are: ready, add, change, unlink, addDir, unlinkDir (related to chokidar's events). If the event ready is choosen, transpiling does not start directly running the script.
 
 ## Example
 
