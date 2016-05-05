@@ -1,6 +1,24 @@
 # transpile-watch
 
-Utility script for transpiling files (es6, scss, ...) and to watch for changes. Convenience wrapper around `chokidar`.
+Utility script for transpiling files (es6, scss, ...) and to watch for changes. Convenience wrapper around [chokidar](https://github.com/paulmillr/chokidar).
+
+
+## Invocation
+
+```javascript
+const watcher = require('transpile-watch');
+
+watcher.watch(options);
+```
+
+
+`watch()` returns the Chokidar watcher object:
+
+```javascript
+const chokidarWatcher = watch({});
+chokidarWatcher.close();
+```
+
 
 ## Options
 
@@ -28,6 +46,10 @@ Function: `function(inPath) -> String`: function to transform a path to an out p
 
 Function: `function(inPath, outPath) -> String`: function to do the transpiling
 
+### transformed
+
+Function: `function()`: called after the transform function has been completed
+
 ### validPath
 
 Function: `function(inPath) -> Boolean`: function to check the validity of the path
@@ -51,8 +73,8 @@ Example script to transpile es6 files:
 // argv[3]: which dir to watch
 // argv[4]: which dir to ignore
 
-var watch = require('transpile-watch');
-watch ({
+const watch = require('transpile-watch');
+watch({
     persistent: !(process.argv[2] === 'once'),
     what: process.argv[3],
     ignore: (process.argv[4] && process.argv[4] !== 'null') ? process.argv[4] : null,
@@ -74,11 +96,11 @@ watch ({
 Invoked to run once:
 
 ```
-"transpile-es6": "node scripts/watch-es6.js once src/"
+"transpile-es6": "node scripts/watcher.js once src/"
 ```
 
 Invoked to watch:
 
 ```
-"watch-es6": "node scripts/watch-es6.js watch src/"
+"watch-es6": "node scripts/watcher.js watch src/"
 ```
