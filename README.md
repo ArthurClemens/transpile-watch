@@ -14,7 +14,7 @@ String: directory to ignore
 
 ### persistent
 
-Boolean: set to `true` to keep watching
+Boolean: set to `true` to keep watching. If set to `true`, the event `ready` is always fired.
 
 ### extension
 
