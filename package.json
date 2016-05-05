@@ -1,6 +1,6 @@
 {
   "name": "transpile-watch",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Utility script for transpiling directories",
   "main": "lib/transpile-watch.js",
   "scripts": {},
