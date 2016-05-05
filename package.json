@@ -19,5 +19,9 @@
       "url": "http://www.opensource.org/licenses/mit-license.php"
     }
   ],
-  "homepage": "https://github.com/ArthurClemens/transpile-watch"
+  "homepage": "https://github.com/ArthurClemens/transpile-watch",
+  "devDependencies": {
+    "mocha": "^2.4.5",
+    "touch": "^1.0.0"
+  }
 }
