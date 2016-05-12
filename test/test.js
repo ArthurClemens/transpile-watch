@@ -6,7 +6,6 @@ const testFileIn = './test/test-file-in.es6';
 const testFileOut = './test/test-file-out.js';
 
 const doesExist = (filePath) => {
-    console.log("doesExist")
     try {
         fs.statSync(filePath);
     } catch (err) {
@@ -19,11 +18,9 @@ const doesExist = (filePath) => {
 
 cleanupTestFiles = () => { 
     if (doesExist(testFileIn)) {
-        console.log("testFileIn does exist")
         fs.unlinkSync(testFileIn);   
     }
     if (doesExist(testFileOut)) {
-        console.log("testFileOut does exist")
         fs.unlinkSync(testFileOut);   
     }
 };
@@ -31,6 +28,8 @@ cleanupTestFiles = () => {
 const verifyFiles = (done) => {
     fs.readFile(testFileIn, 'utf8', function(errIn, contentsIn) {
         fs.readFile(testFileOut, 'utf8', function(errOut, contentsOut) {
+            console.log("contents in : ", contentsIn)
+            console.log("contents out: ", contentsOut)
             if (!errOut) {
                 if (contentsIn !== undefined && contentsOut !== undefined && contentsIn.trim() === contentsOut.trim()) {
                     done();
@@ -70,43 +69,31 @@ describe("Transpile watch", function() {
         cleanupTestFiles();
     });
 
-    describe("Transpile single file", function() {
-        it("Call once", function(done) {
-            prepareInputFile(testFileIn, 'var list = [0,1];');
-            watch(defaultOptions(done))
-        });
+    it("Call once", function(done) {
+        prepareInputFile(testFileIn, 'var list = [0,1];');
+        watch(defaultOptions(done))
+    });
 
-        it("Call once, custom event", function(done) {
-            prepareInputFile(testFileIn, 'var value = "great";');
-            watch(Object.assign(
-                {},
-                defaultOptions(done),
-                {
-                    events: ['init']
-                }
-            ));
-        });
+    it("Call once, custom event", function(done) {
+        prepareInputFile(testFileIn, 'var value = "great";');
+        watch(Object.assign(
+            {},
+            defaultOptions(done),
+            {
+                events: ['ready', 'change']
+            }
+        ));
+    });
 
-        it("Persistent", function(done) {
-            this.timeout(10000);
-            prepareInputFile(testFileIn, 'var a = 0;');
-            const chokidarWatcher = watch(Object.assign(
-                {},
-                defaultOptions(null),
-                {
-                    persistent: true,
-                    transformed: null
-                }
-            ));
-            setTimeout(() => {
-                touch(testFileIn);
-            }, 2000);
-            setTimeout(() => {
-                console.log("setTimeout last")
-                chokidarWatcher.close();
-                verifyFiles(done)
-            }, 5000);
-        });
+    it("Persistent", function(done) {
+        prepareInputFile(testFileIn, 'var a = 0;');
+        watch(Object.assign(
+            {},
+            defaultOptions(done),
+            {
+                persistent: true
+            }
+        ));
     });
 });
 
